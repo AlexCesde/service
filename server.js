@@ -32,12 +32,12 @@ app.listen(port, () => {
 const sql = require("mssql");
 
 const connectionSettings = {
-  server: "DESARROLLO",
-  database: "products",
-  //user: "...",
-  //password: "...",
+  server: "...",
+  database: "...",
+  user: "...",
+  password: "...",
   options: {
-    //encrypt: true,
+    encrypt: true,
     trustServerCertificate: true,
     trustedConnection: true,
   },
@@ -54,8 +54,12 @@ async function getConnection() {
 const getData = async () => {
   try {
     const pool = await getConnection();
-    const result = pool.request().query("SELECT * FROM products");
-    console.log(result);
+    const result = await pool.request().query("SELECT * FROM People");
+    
+    // console.log(result);
+    // optional
+    todos = result.recordset;
+    console.log("OK");
   } catch (error) {
     console.error(error);
   }
